@@ -11,11 +11,10 @@ class Student(models.Model):
     ins_email = models.EmailField(verbose_name="Correo Institicional", blank=True) 
     entry_date = models.DateField(verbose_name="Fecha de Ingreso")
     actual_grade = models.ForeignKey("Grade", on_delete=models.SET_NULL, null=True, verbose_name="Curso")
-    
+    representative = models.ManyToManyField("Representative", blank=True, verbose_name="Apoderado")
+
     def __str__(self): 
-
-
-       return f'{self.name} {self.lname} {self.bday}'
+       return f'{self.lname} {self.name} - {self.actual_grade} - {self.ins_email}'
 
 # El propósito de __str__ es definir cómo se representará el objeto como una cadena cuando se haga referencia a él, por ejemplo, al verlo en el panel de administración de Django o en la consola interactiva.
 
@@ -32,14 +31,24 @@ class Student(models.Model):
 # 
 #               Juan Pérez 2005-06-23    
 class Grade(models.Model):
-    grade_name = models.CharField(max_length=10)
+    grade_name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.grade_name
     
+class Representative(models.Model):
+    rep_rut = models.CharField(max_length=12, blank=True, null=True, unique=True, verbose_name="Rut")
+    rep_lname = models.CharField(max_length=50, blank=True, null=True, verbose_name="Apellidos")
+    rep_name = models.CharField(max_length=56, blank=True, null=True, verbose_name="Nombres")
+    rep_phone = models.CharField(max_length=15, blank=True, null=True, verbose_name="Número Contacto")
+    rep_email = models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
+    rep_address = models.CharField(max_length=50, blank=True, null=True, verbose_name="Dirección")
     
-    
+    def __str__(self):
+        return f'{self.rep_rut} - {self.rep_lname} {self.rep_name}'
+       
+
 # En Django, para hacer que los campos de un modelo sean opcionales,
 #  puedes utilizar los siguientes parámetros en cada campo:
 #  blank=True: Permite que el formulario acepte un valor vacío cuando se está creando o actualizando un objeto.
