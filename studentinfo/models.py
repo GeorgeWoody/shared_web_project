@@ -14,7 +14,7 @@ class Student(models.Model):
     representative = models.ManyToManyField("Representative", blank=True, verbose_name="Apoderado")
 
     def __str__(self): 
-       return f'{self.lname} {self.name} - {self.actual_grade} - {self.ins_email}'
+       return f'{self.rut} - {self.lname}, {self.name} - {self.actual_grade} - {self.ins_email}'
 
 # El propósito de __str__ es definir cómo se representará el objeto como una cadena cuando se haga referencia a él, por ejemplo, al verlo en el panel de administración de Django o en la consola interactiva.
 
@@ -46,7 +46,7 @@ class Representative(models.Model):
     rep_address = models.CharField(max_length=50, blank=True, null=True, verbose_name="Dirección")
     
     def __str__(self):
-        return f'{self.rep_rut} - {self.rep_lname} {self.rep_name}'
+        return f'{self.rep_rut} - {self.rep_lname}, {self.rep_name}'
        
 
 # En Django, para hacer que los campos de un modelo sean opcionales,
