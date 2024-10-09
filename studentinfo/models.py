@@ -16,6 +16,10 @@ class Student(models.Model):
     def __str__(self): 
        return f'{self.rut} - {self.lname}, {self.name} - {self.actual_grade} - {self.ins_email}'
 
+    class Meta:
+        verbose_name = "Alumno"
+        verbose_name_plural = "Alumnos"
+        
 #   "__str__" define cómo se representará el objeto como una "cadena" cuando se haga referencia a él, 
 #   por ejemplo, al verlo en el panel de administración de Django o en la consola interactiva.
 #   No afecta cómo se almacenan los datos en la base de datos, ésta función define cómo se muestra el "objeto"
@@ -35,16 +39,10 @@ class Student(models.Model):
 #           return f'{self.name} {self.lname} {self.bday}'
 #       Entonces, en el admin de Django, verás algo como:
 #           Juan Pérez 2005-06-23    
-class Grade(models.Model):
-    grade_name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    
-    def __str__(self):
-        return self.grade_name
-    
+
 class Representative(models.Model):
-    rep_rut = models.CharField(max_length=12, blank=False, null=False, unique=True, verbose_name="Rut")
-    rep_lname = models.CharField(max_length=50, blank=True, null=True, verbose_name="Apellidos")
+    rep_rut = models.CharField(max_length=12, unique=True, default="0000000000-0", verbose_name="RUT")
+    rep_lname = models.CharField(max_length=50, unique=True, verbose_name="Apellidos")
     rep_name = models.CharField(max_length=56, blank=True, null=True, verbose_name="Nombres")
     rep_phone = models.CharField(max_length=15, blank=True, null=True, verbose_name="Número Contacto")
     rep_email = models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
@@ -52,7 +50,20 @@ class Representative(models.Model):
     
     def __str__(self):
         return f'{self.rep_rut} - {self.rep_lname}, {self.rep_name}'
-       
+    
+    class Meta:
+        verbose_name = "Apoderados"
+        verbose_name_plural = "Apoderados"
+class Grade(models.Model):
+    grade_name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.grade_name
+    
+    class Meta:
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
 
 #   Campos de un modelo sean opcionales,
 #       blank=True: Permite que el formulario acepte un valor vacío cuando se está creando o actualizando un objeto.
@@ -66,19 +77,29 @@ class Representative(models.Model):
 #   Para campos que no son de texto (como DateField o ForeignKey), usa tanto null=True como
 #       blank=True si quieres permitir que el campo esté vacío.
   
-class Subjects(models.Model):
+class Subject(models.Model):
     subject_name = models.CharField(max_length=50, verbose_name="Asignaturas")
     description = models.TextField(verbose_name="Descripción")
         
     def __str__(self):
         return self.subject_name  
+    
+    class Meta:
+        verbose_name = "Asignatura"
+        verbose_name_plural = "Asignaturas"
 
 class Teacher(models.Model):
-    trut = models.CharField(null=False, blank=False, unique=True, max_length=12)
+    trut = models.CharField(null=False, blank=False, unique=True, max_length=12, verbose_name="RUT")
     tlname = models.CharField(null=False, blank=False, max_length=20, verbose_name="Apellidos")
     tname = models.CharField(null=False, blank=False, max_length=20, verbose_name="Nombres")
     tphone = models.CharField(null=True, blank=True, max_length=12, verbose_name="Número de Contacto")
-    temail = models.EmailField()
+    temail = models.EmailField(verbose_name="Correo")
+    tins_email = models.EmailField(default="a@a.a", verbose_name="Correo Institucional")
     
     def __str__(self):
-        return f'{self.trut} - {self.tlname}, {self.tlname} - {self.temail}'
+        return f'RUT: {self.trut} - Nombre: {self.tlname}, {self.tname} - Correo: {self.temail}'
+
+    class Meta:
+        verbose_name = "Profesor/a"
+        verbose_name_plural = "Profesores/as"
+        ordering = ["tlname", "tname"]
