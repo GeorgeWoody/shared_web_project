@@ -1,17 +1,17 @@
 from django.db import models
 
 class Student(models.Model):
-    rut = models.CharField(max_length=12, unique=True, verbose_name="RUT")
-    lname = models.CharField(max_length=50, verbose_name="Apellidos")
-    name = models.CharField(max_length=50, verbose_name="Nombres")
-    bday = models.DateField(verbose_name="Fecha de Nacimiento")
-    address = models.CharField(max_length=250, verbose_name="Domicilio")
-    phone = models.CharField(max_length=15, verbose_name="Número de Teléfono")
-    email = models.EmailField(verbose_name="Correo Electrónico")
-    ins_email = models.EmailField(verbose_name="Correo Institicional", blank=True) 
-    entry_date = models.DateField(verbose_name="Fecha de Ingreso")
+    rut = models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
+    lname = models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
+    name = models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
+    bday = models.DateField(null=False, blank=False, verbose_name="Fecha de Nacimiento")
+    address = models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
+    phone = models.CharField(max_length=15, null=False, blank=False, verbose_name="Número de Teléfono")
+    email = models.EmailField(null=True, blank=True, verbose_name="Correo Electrónico")
+    ins_email = models.EmailField(verbose_name="Correo Institucional", null=True, blank=True) 
+    entry_date = models.DateField(null=False, blank=False, verbose_name="Fecha de Ingreso")
     actual_grade = models.ForeignKey("Grade", on_delete=models.SET_NULL, null=True, verbose_name="Curso")
-    representative = models.ManyToManyField("Representative", blank=True, verbose_name="Apoderado")
+    representative = models.ManyToManyField("Representative", blank=False, verbose_name="Apoderado")
 
     def __str__(self): 
        return f'{self.rut} - {self.lname}, {self.name} - {self.actual_grade} - {self.ins_email}'
@@ -41,12 +41,12 @@ class Student(models.Model):
 #           Juan Pérez 2005-06-23    
 
 class Representative(models.Model):
-    rep_rut = models.CharField(max_length=12, unique=True, default="0000000000-0", verbose_name="RUT")
-    rep_lname = models.CharField(max_length=50, unique=True, verbose_name="Apellidos")
-    rep_name = models.CharField(max_length=56, blank=True, null=True, verbose_name="Nombres")
-    rep_phone = models.CharField(max_length=15, blank=True, null=True, verbose_name="Número Contacto")
-    rep_email = models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
-    rep_address = models.CharField(max_length=50, blank=True, null=True, verbose_name="Dirección")
+    rep_rut =       models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
+    rep_lname =     models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
+    rep_name =      models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
+    address =       models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
+    rep_phone =     models.CharField(max_length=15, blank=True, null=True, verbose_name="Número Contacto")
+    rep_email =     models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
     
     def __str__(self):
         return f'{self.rep_rut} - {self.rep_lname}, {self.rep_name}'
@@ -55,7 +55,7 @@ class Representative(models.Model):
         verbose_name = "Apoderados"
         verbose_name_plural = "Apoderados"
 class Grade(models.Model):
-    grade_name = models.CharField(max_length=100)
+    grade_name = models.CharField(max_length=50, null=False, blank=False)
     description = models.TextField(blank=True, null=True)
     
     def __str__(self):
@@ -89,12 +89,13 @@ class Subject(models.Model):
         verbose_name_plural = "Asignaturas"
 
 class Teacher(models.Model):
-    trut = models.CharField(null=False, blank=False, unique=True, max_length=12, verbose_name="RUT")
-    tlname = models.CharField(null=False, blank=False, max_length=20, verbose_name="Apellidos")
-    tname = models.CharField(null=False, blank=False, max_length=20, verbose_name="Nombres")
-    tphone = models.CharField(null=True, blank=True, max_length=12, verbose_name="Número de Contacto")
-    temail = models.EmailField(verbose_name="Correo")
-    tins_email = models.EmailField(default="a@a.a", verbose_name="Correo Institucional")
+    trut =      models.CharField(max_length=12, null=False, blank=False, unique=True, verbose_name="RUT")
+    tlname =    models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
+    tname =     models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
+    address =   models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
+    tphone =    models.CharField(max_length=12, null=True, blank=True, verbose_name="Número de Contacto")
+    temail =    models.EmailField(null=True, blank=True, verbose_name="Correo")
+    tins_email = models.EmailField(null=True, blank=True, verbose_name="Correo Institucional")
     
     def __str__(self):
         return f'RUT: {self.trut} - Nombre: {self.tlname}, {self.tname} - Correo: {self.temail}'

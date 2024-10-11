@@ -7,3 +7,6 @@ class StudentForm(forms.ModelForm):
         model = Student
         fields = '__all__'
         
+        widgets = {
+            'representative': forms.CheckboxSelectMultiple,  # Este widget te permitirá seleccionar múltiples apoderados
+        }
