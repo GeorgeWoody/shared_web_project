@@ -1,17 +1,17 @@
 from django.db import models
 
 class Student(models.Model):
-    rut = models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
-    lname = models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
-    name = models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
-    bday = models.DateField(null=False, blank=False, verbose_name="Fecha de Nacimiento")
-    address = models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
-    phone = models.CharField(max_length=15, null=False, blank=False, verbose_name="Número de Teléfono")
-    email = models.EmailField(null=True, blank=True, verbose_name="Correo Electrónico")
-    ins_email = models.EmailField(verbose_name="Correo Institucional", null=True, blank=True) 
-    entry_date = models.DateField(null=False, blank=False, verbose_name="Fecha de Ingreso")
-    actual_grade = models.ForeignKey("Grade", on_delete=models.SET_NULL, null=True, verbose_name="Curso")
-    representative = models.ManyToManyField("Representative", blank=False, verbose_name="Apoderado")
+    rut =               models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
+    lname =             models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
+    name =              models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
+    bday =              models.DateField(null=False, blank=False, verbose_name="Fecha de Nacimiento")
+    address =           models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
+    phone =             models.CharField(max_length=15, null=False, blank=False, verbose_name="Número de Teléfono")
+    email =             models.EmailField(null=True, blank=True, verbose_name="Correo Electrónico")
+    ins_email =         models.EmailField(verbose_name="Correo Institucional", null=True, blank=True) 
+    entry_date =        models.DateField(null=False, blank=False, verbose_name="Fecha de Ingreso")
+    actual_grade =      models.ForeignKey("Grade", on_delete=models.SET_NULL, null=True, verbose_name="Curso")
+    representative =    models.ManyToManyField("Representative", blank=False, verbose_name="Apoderado")
 
     def __str__(self): 
        return f'{self.rut} - {self.lname}, {self.name} - {self.actual_grade} - {self.ins_email}'
@@ -65,7 +65,7 @@ class Grade(models.Model):
         verbose_name = "Curso"
         verbose_name_plural = "Cursos"
 
-#   Campos de un modelo sean opcionales,
+#   Campos de un modelo sean opcionales
 #       blank=True: Permite que el formulario acepte un valor vacío cuando se está creando o actualizando un objeto.
 #       null=True: Permite que la base de datos acepte valores NULL para ese campo. Útil para campos no obligatorios 
 #       que pueden quedarse vacíos.  
