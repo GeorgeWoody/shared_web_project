@@ -9,13 +9,13 @@ class StudentForm(forms.ModelForm):
         model = Student
         fields = '__all__'
         
-        widgets = {
-            'representative': forms.CheckboxSelectMultiple,  # Este widget te permitirá seleccionar múltiples apoderados
-        }
+#        widgets = {
+#            'representative': forms.CheckboxSelectMultiple,  # Este widget te permitirá seleccionar múltiples apoderados
+#        }
         
 class RepresentativeForm(forms.ModelForm):
     class Meta:
         model = Representative
         fields = '__all__'
         
-RepresentativeFormSet = inlineformset_factory(Student, Student.representative.through, form=RepresentativeForm)
+RepresentativeFormSet = inlineformset_factory(Student, Student.representative.through, form=RepresentativeForm, extra=1)
