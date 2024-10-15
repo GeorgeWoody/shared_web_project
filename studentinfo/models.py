@@ -44,7 +44,7 @@ class Representative(models.Model):
     rep_rut =       models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
     rep_lname =     models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
     rep_name =      models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")
-    address =       models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
+    address =   models.CharField(max_length=250, null=False, blank=False, verbose_name="Domicilio")
     rep_phone =     models.CharField(max_length=15, blank=True, null=True, verbose_name="Número Contacto")
     rep_email =     models.EmailField(blank=True, null=True, verbose_name="Correo Electrónico")
     
