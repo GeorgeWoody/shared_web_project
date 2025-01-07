@@ -1,0 +1,36 @@
+{% extends 'index/base.html' %}
+
+{% block content %}
+
+<h2>Lista De Estudiantes</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>RUT</th>
+        <th>APELLIDOS</th>
+        <th>NOMBRES</th>
+        <th>CURSO</th>
+        <th>CORREO</th>
+        <th>DIRECCION</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.rut }}</td>
+            <td>{{ student.lname }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.grade }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.address }}</td>
+            <td>
+                <a href="{% url 'student_info' student.id %}">Ver Detalles</a>
+                <a href="{% url 'delete_student student.id %}">Borrar Estudiante</a>
+            </td>
+        </tr>
+        {% end for %}
+
+    </tbody>
+</table>
