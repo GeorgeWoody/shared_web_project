@@ -1,6 +1,9 @@
 from django.db import models
 
+#from django.db.models.query import QuerySet
+
 class Student(models.Model):
+#    objects: QuerySet
     rut = models.CharField(max_length=12, unique=True, null=False, blank=False, verbose_name="RUT")
     lname = models.CharField(max_length=50, null=False, blank=False, verbose_name="Apellidos")
     name = models.CharField(max_length=50, null=False, blank=False, verbose_name="Nombres")

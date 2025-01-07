@@ -11,8 +11,17 @@ def student_home(request):
 
 def student_search(request):
     query = request.GET.get('q', '')
-    students = Student.objects.filter(name__icontains=query)
-    return render(request, 'studentinfo/student_search.html')
+    if query:                                                               # Si hay consulta...
+        students = Student.objects.filter(name__icontains=query)            # Filtra por nombre.
+    else:                                                                   # Si no hay consulta...
+        students = Student.objects.all()                                    # Mostrar todos los estudiantes.
+
+    context = {
+        'query':query,
+        'students':students
+    }
+
+    return render(request, 'studentinfo/student_search.html', context)
 
 # def add_student(request): #Definición de la vista; se encargará de mostrar el formulario y procesar la creación de un nuevo Estudiante. La función recibe el "objeto" "request" como argumento, que contiene toda la información de la solicitud HTTP hecha por el usuario (GET, POST, cookies, etc.).
 #     if request.method == 'POST':

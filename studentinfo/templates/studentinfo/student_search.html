@@ -1,0 +1,26 @@
+{% extends 'index/base.html' %}
+
+
+{% block content %}
+
+<h1>Bienvenido a la Página de "Búsqueda de Alumnos"</h1>
+<p>Esta es la página principal sobre Búsqueda de Datos de los estudiantes</p>
+
+    <!--FORMULARIO-->
+    <form method="get" action="">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar Estudiante">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!--LÓGICA-->
+    {% if students %}
+        <h2>Resultados</h2>
+        <ul>
+            {% for student in students %}
+            <li>{{ student.lname}} - {{ student.name }} - {{ student.rut }} - {{ student.address }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron estudiantes</p>
+    {% endif %}
+{% endblock %}
