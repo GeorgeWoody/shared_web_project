@@ -1,18 +1,38 @@
 from django.shortcuts import render, redirect
 
+from django.db.models import Q
+"""Función Q de Django: realiza consultas complejas, permitiendo filtrar por varios campos a la vez"""
+
 from studentinfo.models import Student
+from .forms import StudentForm
 
-
-#from .forms import StudentForm, RepresentativeFormSet
 #from .models import Student
 
 def student_home(request):
     return render(request, 'studentinfo/student_home.html')
 
+def student_add(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student-list')
+    else:
+        form = StudentForm
+    return render(request, 'studentinfo/student_add.html', {'form': form})
+
 def student_search(request):
     query = request.GET.get('q', '')
-    if query:                                                               # Si hay consulta...
-        students = Student.objects.filter(name__icontains=query)            # Filtra por nombre.
+    if query:
+        students = Student.objects.filter(
+            Q(name__icontains=query)|
+            Q(lname__icontains=query)|
+            Q(rut__icontains=query)
+        )
+        """Se ha importado Q de django.db.models, que permite combinar condiciones en una consulta de manera flexible.
+           La consulta busca en los tres campos: name, lname y rut. Se usa | (OR) para que la consulta filtre por 
+           cualquier campo que contenga la cadena query."""
+
     else:                                                                   # Si no hay consulta...
         students = Student.objects.all()                                    # Mostrar todos los estudiantes.
 
@@ -38,7 +58,7 @@ def student_search(request):
 #         student_form = StudentForm()
 #         representative_formset = RepresentativeFormSet()
 #
-#     return render(request, 'studentinfo/add_student.html',
+#     return render(request, 'studentinfo/student_add.html',
 #     {'student_form':student_form},{'representative_form': representative_formset})
 #
 # def student_list(request):

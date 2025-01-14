@@ -9,6 +9,7 @@ urlpatterns = [
     path("student_home/", views.student_home, name="student_home"),
     #############################
     ### FUNCTIONALITY URL'S #####
+    path("student_add/", views.student_add, name="student_add"),
     path("student_search/", views.student_search, name="student_search"),
     # path("add_student/", views.add_student, name="add_student"),
     # path("success/", TemplateView.as_view(template_name="success"), name="success"),

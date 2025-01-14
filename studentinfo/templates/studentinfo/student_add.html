@@ -15,7 +15,8 @@
         <h1 class="text-center">Agregar Estudiante</h1>
             <form method = "POST" class="mt4">
                 {% csrf_token %}
-                {{student_form.as_p}}
+                <!--{{student_form.as_p}}-->
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
     </div>
