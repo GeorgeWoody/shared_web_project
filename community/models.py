@@ -6,14 +6,12 @@
 ### OTHER PERSONNEL
 
 from django.db import models
-from django.forms import CharField
-
 
 class Student(models.Model):
     # PERSONAL INFORMATION
     name                    = models.CharField(null=False, blank=False, max_length=50, verbose_name='NOMBRE')
     last_name               = models.CharField(null=False, blank=False, max_length=50, verbose_name='APELLIDOS')
-    rut                     = models.CharField(null=False, blank=False, max_length=12, unique=True, verbose_name='RUT')
+    rut                     = models.CharField(null=False, blank=False, max_length=12, unique=True, verbose_name='RUT (sin puntos, solo guión)')
     birth_day               = models.DateField(null=False, blank=False, verbose_name='FECHA DE NACIMIENTO')
     address                 = models.CharField(null=False, blank=False, max_length=50, verbose_name='DIRECCIÓN')
 
@@ -36,4 +34,9 @@ class Student(models.Model):
     grade                   = models.CharField(choices=GRADE_CHOICES, max_length=3, verbose_name='CURSO')
     institutional_email     = models.EmailField(null=False, blank=True, verbose_name='CORREO ELECTRÓNICO (opcional)')
 
+    class Meta:
+        verbose_name        = 'Alumno'
+        verbose_name_plural = 'Alumnos'
 
+    def __str__(self):
+        return f'{self.last_name}, {self.name} - {self.rut} - {self.birth_day}'

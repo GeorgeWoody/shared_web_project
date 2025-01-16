@@ -23,6 +23,7 @@ urlpatterns = [
     
     path("polls/", include("polls.urls")),
     path("", include("studentinfo.urls")),
+    path("community/", include("community.urls")),
     
     
     path('admin/', admin.site.urls),
