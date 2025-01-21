@@ -3,10 +3,14 @@ from django.db.models import Q
 """Función Q de Django: realiza consultas complejas, permitiendo filtrar por varios campos a la vez"""
 
 from .forms import StudentForm
-from .models import Student
+from .models import Student, Teacher
 
 def community_home_view(request):
     return render(request, 'community_home.html')
+
+def community_teacher_list_view(request):
+    teacher_list = Teacher.objects.all()
+    return render(request, 'teacher_list.html',{'teacher_list':teacher_list})
 
 
 def student_search_view(request):

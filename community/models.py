@@ -7,6 +7,9 @@
 
 from django.db import models
 
+###packages###
+#from phonenumber_field.modelfields import PhoneNumberField
+
 class Student(models.Model):
     # PERSONAL INFORMATION
     name                    = models.CharField(null=False, blank=False, max_length=50, verbose_name='NOMBRE')
@@ -41,3 +44,20 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.last_name}, {self.name} - {self.rut} - {self.birth_day}'
+    
+
+class Teacher(models.Model):
+    last_name           = models.CharField(null=False, blank=False, max_length=50, verbose_name='Apellidos')
+    name                = models.CharField(null=False, blank=False, max_length=50, verbose_name='Nombre')
+    rut                 = models.CharField(null=False, blank=False, max_length=12, verbose_name='RUT')
+    address             = models.CharField(null=False, blank=False, max_length=50, verbose_name='Dirección')
+    city                = models.CharField(null=False, blank=False, max_length=50, verbose_name='Ciudad')
+    academic_degree     = models.CharField(null=False, blank=False, max_length=50, verbose_name='Título Académido')
+    phone_number        = models.CharField(null=True, blank=True, max_length=12, verbose_name='Número Telefónico (opcional)')
+
+    class Meta:
+        verbose_name = 'Profesor'
+        verbose_name_plural = 'Profesores'
+
+    def __str__(self):
+        return f'{self.last_name}, {self.name} - {self.rut} - {self.academic_degree} - {self.phone_number}'
