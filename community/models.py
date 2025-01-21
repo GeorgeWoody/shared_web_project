@@ -14,6 +14,7 @@ class Student(models.Model):
     rut                     = models.CharField(null=False, blank=False, max_length=12, unique=True, verbose_name='RUT (sin puntos, solo guión)')
     birth_day               = models.DateField(null=False, blank=False, verbose_name='FECHA DE NACIMIENTO')
     address                 = models.CharField(null=False, blank=False, max_length=50, verbose_name='DIRECCIÓN')
+    city                    = models.CharField(null=False, blank=False, max_length=50, verbose_name='CIUDAD')
 
     # INSTITUTIONAL INFORMATION
     enrollment_date         = models.DateField(null=False, blank=False, verbose_name='FECHA DE INGRESO')
@@ -32,7 +33,7 @@ class Student(models.Model):
         ('4M', '4to Medio'),
     ]
     grade                   = models.CharField(choices=GRADE_CHOICES, max_length=3, verbose_name='CURSO')
-    institutional_email     = models.EmailField(null=False, blank=True, verbose_name='CORREO ELECTRÓNICO (opcional)')
+    institutional_email     = models.EmailField(null=False, blank=True, verbose_name='CORREO ELECTRÓNICO INSTITUCIONAL (opcional)')
 
     class Meta:
         verbose_name        = 'Alumno'

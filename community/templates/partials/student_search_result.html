@@ -1,0 +1,21 @@
+{% block content %}
+<ul>
+    {% if students_instance %}
+        <h2>RESULTADOS</h2>
+        <ul class="list-group">
+        {% for student_instance in students_instance %}    
+            <li class="list-group-item">
+                <span class="text-muted">RUT: </span> {{ student_instance.rut }}<br>
+                <span class="text-muted">Apellido: </span>{{ student_instance.last_name }}<br>
+                <span class="text-muted">Nombre: </span>{{ student_instance.name }}<br>
+                <span class="text-muted">Dirección: </span> {{ student_instance.address }}<br>
+                <span class="text-muted">Ciudad: </span> {{ student_instance.city }}<br>
+                <span class="text-muted">Correo Institucional: </span> {{ student_instance.ins_email }}<br>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <li class="list-group-item">No se encontraron Estudiantes</li>
+    {% endif %}
+</ul>
+{% endblock %}

@@ -14,10 +14,10 @@
 <body>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-5">Gestion de Alumnos</h1>
+        <h1 class="text-center mb-5">HOME PAGE Gestion de Alumnos</h1>
 
     <!--add student form-->
-        <div class="card mb-4">
+        <!-- <div class="card mb-4">
             <div class="card-header">Agregar Alumno</div>
             <div class="card-body">
                 <form method="POST" hx-post="{% url 'student_add' %}" hx-target="#form-response">
@@ -30,6 +30,29 @@
                 <div id="form-response" class="mt-3"></div>
             </div>
         </div>
+ -->
+
+     {% include 'partials/student_search_form.html' %} 
+
+     <div id="search-results" class="mt-3">
+        <p>Escribe para buscar estudiantes...</p>
+    </div>
+
+    {% include 'partials/student_search_result.html' %}
+
+    <!--search student form-->
+        <!-- <div class="card">
+            <div class="card-header">Buscar Alumno</div>
+            <div class="card-body">
+                <form hx-get="{% url 'student_search'}" hx-target="#search-results" hx-trigger="keyup changed delay:500ms">
+                    <div class="mb-3">
+                        <label for="search" class="form-label">Buscar por Nombre o RUT</label>
+                        <input type="text" id="search" name="q" class="form-control" placeholder="Ingrese Nombre o RUT">
+                    </div>
+                </form>
+                <div id="search-results" class="mt-3"></div>
+            </div>
+        </div>> -->
 
     </div>
 
