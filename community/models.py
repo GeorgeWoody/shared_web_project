@@ -52,6 +52,7 @@ class Teacher(models.Model):
     rut                 = models.CharField(null=False, blank=False, max_length=12, verbose_name='RUT')
     address             = models.CharField(null=False, blank=False, max_length=50, verbose_name='Dirección')
     city                = models.CharField(null=False, blank=False, max_length=50, verbose_name='Ciudad')
+    email               = models.EmailField(blank=True, verbose_name='Correo Electronico (opcional)')
     academic_degree     = models.CharField(null=False, blank=False, max_length=50, verbose_name='Título Académido')
     phone_number        = models.CharField(null=True, blank=True, max_length=12, verbose_name='Número Telefónico (opcional)')
 

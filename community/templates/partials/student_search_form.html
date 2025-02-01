@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<form method="GET" hx-get="{% url 'student_search' %}" hx-target="#search-results" class="d-flex">
-    <input type="text" name="q" class="form-control me-2" placeholder="Buscar por Nombre o RUT">
-    <button type="submit" class="btn btn-primary">Buscar</button>
-</form>
+<div class="container mt-3">
+    <h1>Formulario Busqueda Alumnos</h1>
+    <p>(este bloque pertenece al "partials" student_search_form.html)</p>
+        <form method="GET" hx-get="{% url 'student_search' %}" hx-target="#search-results" class="d-flex">
+            <input type="text" name="q" class="form-control me-2" placeholder="Buscar por Nombre o RUT">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
 
+</div>
 {% endblock %}

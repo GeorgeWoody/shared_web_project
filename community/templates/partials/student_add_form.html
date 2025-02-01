@@ -1,0 +1,38 @@
+{% block content %}
+
+    <!-- Formulario para agregar estudiantes -->
+<div class="container mt-3">
+    
+    <h1>Formulario para Agregar Alumnos</h1>
+    <p>(este bloque pertenece al "partials" student_add_form.html)</p>
+        <div class="container">
+    
+            <form method="POST" action="{% url 'student_add' %}">
+                {% csrf_token %}
+    
+                <div class="mb-3">
+                    {{ student_add_form.as_p }} <!-- Renderiza el formulario -->
+                </div>
+    
+                <button type="submit" class="btn btn-primary">Agregar Estudiante</button>
+    
+            </form>    
+    
+        </div>
+
+        {% if messages %}
+        
+            <div class="container mt-3">
+                {% for message in messages %}
+                <div class="alert alert-{message.tags}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+
+</div>
+
+
+{% endblock %}
